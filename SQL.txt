@@ -1,0 +1,18 @@
+ برای نشان دادن کارمندی که فامیلش احمدی است 
+
+SELECT ln FROM bakhsh as b INNER JOIN karmandan as k ON b.dcode=k.dcode WHERE k.ln="ahmadi";
+
+
+برای نام و نام خانوادگی کارمند های که برای بیشتر از 2 پروژه کار میکنند 
+
+SELECT k.ln,k.fn,COUNT(w.pcode)as tadad FROM work as w INNER JOIN karmandan as k ON w.ecode=k.code GROUP BY k.ln,k.fn,w.pcode HAVING tadad >=2;
+
+
+نام و  نام خانوادگی کارمندانی که رو پروژه ای که تو نیشابور هست کار میکنند 
+
+SELECT ln,fn FROM work as w INNER JOIN karmandan as k ON w.ecode=k.code INNER JOIN proje as p ON w.pcode = p.code WHERE p.plocation="Neyshabur";
+
+
+نام و نام خانوادگی کارمندانی که رو یک پروژه کار میکنند 
+
+SELECT k.ln,k.fn,COUNT(p.code) FROM work as w INNER JOIN karmandan as k ON w.ecode=k.code INNER JOIN proje as p ON w.pcode=p.code GROUP BY k.ln,k.fn,p.code HAVING p.code >1;
